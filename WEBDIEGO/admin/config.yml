@@ -1,0 +1,16 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "menu"
+    label: "Menú y Carta"
+    files:
+      - file: "index.html"
+        label: "Página Principal"
+        name: "index"
+        fields:
+          - {label: "Título Principal", name: "title", widget: "string"}

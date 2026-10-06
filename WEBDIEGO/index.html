@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIEGO - Pizzería & Milas | Barcelona Street Food</title>
+    <script src="https://tally.so/widgets/embed.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #050505; color: #ffffff; padding-bottom: 40px; -webkit-font-smoothing: antialiased; }
+
+        /* BARRA SUPERIOR */
+        .top-info-bar { background: #000000; font-size: 0.72rem; color: #9a9a9a; padding: 8px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #141414; flex-wrap: wrap; gap: 6px; }
+        .top-info-bar span { display: flex; align-items: center; gap: 4px; }
+        .dot-green { color: #10b981; font-size: 0.8rem; }
+
+        /* HEADER FIJO */
+        .site-header { background: #0c0c0e; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #1a1a1e; }
+        .brand-block { display: flex; align-items: center; gap: 10px; }
+        .brand-logo { background: #ffffff; color: #000000; font-weight: 900; font-size: 1.15rem; padding: 3px 8px; border-radius: 2px; letter-spacing: -0.5px; }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-title { font-size: 0.9rem; font-weight: 900; letter-spacing: 0.5px; line-height: 1; }
+        .brand-sub { font-size: 0.62rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+        .header-actions { display: flex; gap: 8px; }
+        .btn-hdr-res { background: #1c1c1f; color: #ffffff; border: 1px solid #27272a; padding: 7px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 4px; }
+        .btn-hdr-take { background: #ffffff; color: #000000; padding: 7px 14px; border-radius: 6px; font-size: 0.75rem; font-weight: 900; text-decoration: none; text-transform: uppercase; }
+
+        /* MAIN CONTAINER RESPONSIVE */
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 16px; }
+
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 36px 16px 24px; background: linear-gradient(180deg, rgba(20,20,22,0.6) 0%, rgba(5,5,5,1) 100%); margin-bottom: 15px; border-radius: 0 0 20px 20px; }
+        .pill-tag { display: inline-block; border: 1px solid #27272a; padding: 5px 14px; border-radius: 20px; font-size: 0.72rem; color: #a1a1aa; font-weight: 700; letter-spacing: 1px; margin-bottom: 16px; background: rgba(255,255,255,0.02); }
+        .hero-title { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; line-height: 1.05; letter-spacing: 0.5px; margin-bottom: 14px; }
+        .hero-desc { font-size: 0.9rem; color: #9ca3af; line-height: 1.45; margin-bottom: 24px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero-btns { display: flex; flex-direction: column; gap: 10px; max-width: 480px; margin: 0 auto; }
+        .row-btns { display: flex; gap: 8px; }
+        .btn-main-white { background: #ffffff; color: #000000; flex: 1; padding: 12px; border-radius: 10px; font-size: 0.82rem; font-weight: 900; text-decoration: none; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .btn-main-dark { background: #121214; color: #ffffff; border: 1px solid #27272a; flex: 1; padding: 12px; border-radius: 10px; font-size: 0.8rem; font-weight: 800; text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .btn-glovo { background: #1c180d; color: #f59e0b; border: 1px solid #3d2f10; padding: 11px; border-radius: 10px; font-size: 0.8rem; font-weight: 800; text-decoration: none; text-transform: uppercase; text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px; }
+
+        /* TITULARES DE SECCIÓN */
+        .sec-header { margin: 30px 0 16px; }
+        .sec-subtag { font-size: 0.7rem; color: #34d399; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px; }
+        .sec-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; line-height: 1.1; letter-spacing: 0.5px; }
+        .sec-desc { font-size: 0.82rem; color: #71717a; margin-top: 4px; }
+
+        /* CARDS HIGHLIGHT GRID (ADAPTABLE) */
+        .cards-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+        @media (min-width: 640px) {
+            .cards-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-title { font-size: 2.8rem; }
+        }
+
+        .card-item { background: #121215; border: 1px solid #22222a; border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+        .card-img-wrap { position: relative; width: 100%; height: 200px; background: #1a1a1e; }
+        .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .card-badge { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); color: #f59e0b; font-size: 0.65rem; font-weight: 900; padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(245,158,11,0.3); text-transform: uppercase; }
+        .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card-title { font-size: 1.05rem; font-weight: 900; text-transform: uppercase; margin-bottom: 6px; }
+        .card-text { font-size: 0.8rem; color: #9ca3af; line-height: 1.4; margin-bottom: 12px; }
+        .card-meta { font-size: 0.74rem; color: #52525b; border-top: 1px solid #1a1a1e; padding-top: 10px; display: flex; justify-content: space-between; }
+
+        /* CATEGORÍAS (PILLS) */
+        .cat-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 18px; scrollbar-width: none; }
+        .cat-scroll::-webkit-scrollbar { display: none; }
+        .cat-pill { background: #121215; border: 1px solid #22222a; color: #ffffff; padding: 9px 16px; border-radius: 12px; font-size: 0.78rem; font-weight: 800; white-space: nowrap; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .cat-pill.active { background: #ffffff; color: #000000; border-color: #ffffff; }
+
+        /* LISTA DE PLATOS (LIST GRID) */
+        .items-list-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        @media (min-width: 768px) {
+            .items-list-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .menu-list-card { background: #121215; border: 1px solid #22222a; border-radius: 14px; padding: 14px 16px; position: relative; }
+        .menu-list-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+        .menu-list-title { font-size: 0.95rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.3px; }
+        .tag-small { font-size: 0.62rem; font-weight: 800; padding: 3px 7px; border-radius: 4px; text-transform: uppercase; }
+        .tag-tradicional { background: #1a1a1e; color: #a1a1aa; border: 1px solid #27272a; }
+        .tag-top { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+        .tag-picante { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+        .tag-gourmet { background: rgba(16,185,129,0.15); color: #10b981; border: 1px solid rgba(16,185,129,0.3); }
+        .tag-estrella { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
+        .menu-list-desc { font-size: 0.78rem; color: #9ca3af; line-height: 1.35; }
+
+        /* BLOQUES DE CATEGORÍA */
+        .cat-block { display: none; }
+        .cat-block.active { display: block; }
+        .cat-banner { background: #18181c; border: 1px solid #27272a; border-radius: 14px; padding: 16px; margin-bottom: 16px; }
+        .cat-banner-title { font-size: 1.05rem; font-weight: 900; text-transform: uppercase; color: #ffffff; display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+        .cat-banner-desc { font-size: 0.78rem; color: #a1a1aa; line-height: 1.35; }
+
+        /* ESTILOS MENÚ DE MEDIODÍA */
+        .menu-diao-header-box { background: linear-gradient(180deg, #18150c 0%, #121215 100%); border: 1px solid #3d2f10; border-radius: 18px; padding: 22px 18px; margin-bottom: 18px; position: relative; }
+        .menu-time-badge { display: inline-flex; align-items: center; gap: 6px; background: #f59e0b; color: #000000; font-size: 0.7rem; font-weight: 900; padding: 5px 12px; border-radius: 20px; text-transform: uppercase; margin-bottom: 12px; }
+        .menu-diao-title { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; line-height: 1.05; margin-bottom: 8px; color: #ffffff; }
+        .menu-diao-sub { font-size: 0.82rem; color: #9ca3af; line-height: 1.4; margin-bottom: 16px; }
+        .fresh-product-box { background: #0a0a0c; border: 1px solid #27272a; border-radius: 12px; padding: 12px; text-align: center; }
+        .fresh-title { color: #f59e0b; font-size: 0.78rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+        .fresh-desc { color: #71717a; font-size: 0.72rem; margin-top: 2px; }
+
+        .menu-steps-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        @media (min-width: 768px) {
+            .menu-steps-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        .menu-step-card { background: #121215; border: 1px solid #22222a; border-radius: 18px; padding: 20px 16px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+        .step-num-badge { position: absolute; top: 16px; right: 16px; font-size: 1.6rem; font-weight: 900; color: #3d2f10; line-height: 1; }
+        .step-header-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .step-icon-box { background: #261f0c; color: #f59e0b; width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.15rem; }
+        .step-title { font-size: 1.1rem; font-weight: 900; text-transform: uppercase; line-height: 1; }
+        .step-sub { font-size: 0.7rem; color: #71717a; margin-top: 3px; }
+        
+        .step-divider { border-top: 1px dashed #22222a; margin-bottom: 12px; }
+        .check-list { list-style: none; }
+        .check-list li { font-size: 0.8rem; color: #d1d5db; margin-bottom: 8px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.35; }
+        .check-list li::before { content: "✓"; color: #f59e0b; font-weight: 900; }
+
+        .dessert-section-title { font-size: 0.8rem; font-weight: 800; color: #ffffff; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+        .dessert-text { font-size: 0.76rem; color: #9ca3af; margin-bottom: 14px; line-height: 1.35; }
+        .menu-included-box { background: #0a0a0c; border: 1px solid #27272a; border-radius: 10px; padding: 10px 12px; font-size: 0.74rem; color: #f59e0b; font-weight: 700; line-height: 1.35; }
+
+        /* MODULO RESERVA */
+        .booking-box { background: #121215; border: 1px solid #22222a; border-radius: 18px; padding: 20px 14px; margin-top: 35px; margin-bottom: 25px; text-align: center; }
+        .tally-frame { border: none; width: 100%; border-radius: 10px; background: transparent; }
+    </style>
+</head>
+<body>
+
+    <!-- TOP BAR -->
+    <div class="top-info-bar">
+        <span><span class="dot-green">●</span> Sant Andreu · Rambla Fabra i Puig 35, Barcelona</span>
+        <span>📞 933 11 43 51 &nbsp;|&nbsp; 📷 @pizzeriadiegobarcelona</span>
+    </div>
+
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="brand-block">
+            <div class="brand-logo">DIEGO</div>
+            <div class="brand-text">
+                <span class="brand-title">PIZZERÍA & MILAS</span>
+                <span class="brand-sub">BARCELONA STREET FOOD</span>
+            </div>
+        </div>
+        <div class="header-actions">
+            <a href="#reservas" class="btn-hdr-res">📅 RESERVAR</a>
+            <a href="#carta" class="btn-hdr-take">TAKE AWAY</a>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="pill-tag">// SANT ANDREU · BARCELONA</div>
+            <h1 class="hero-title">PIZZAS ARTESANAS<br>& MILANESAS XL</h1>
+            <p class="hero-desc">Cocina de barrio artesanal con ingrediente fresco, milanesas gigantes y el auténtico espíritu de la Rambla Fabra i Puig.</p>
+            <div class="hero-btns">
+                <div class="row-btns">
+                    <a href="#reservas" class="btn-main-white">🍴 RESERVAR MESA</a>
+                    <a href="tel:933114351" class="btn-main-dark">📞 LLAMAR (933 11 43 51)</a>
+                </div>
+                <a href="#" class="btn-glovo">🛵 GLOVO DELIVERY</a>
+            </div>
+        </section>
+
+        <!-- IMPRESCINDIBLES -->
+        <div class="sec-header">
+            <div class="sec-subtag">// MUST TRY · TOP VENTAS</div>
+            <h2 class="sec-title">LOS IMPRESCINDIBLES DEL DIEGO</h2>
+            <p class="sec-desc">Nuestros favoritos recomendados para tu primera visita</p>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card-item">
+                <div class="card-img-wrap">
+                    <span class="card-badge">★ ESPECIALIDAD XL</span>
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Milanesa XL">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3 class="card-title">MILANESA LA GIGANTE</h3>
+                        <p class="card-text">Formato familiar ideal para compartir. Crujiente rebozado artesano al verdadero estilo Diego.</p>
+                    </div>
+                    <div class="card-meta"><span>Para 2-3 personas</span> <span>👥 Ideal grupos</span></div>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-img-wrap">
+                    <span class="card-badge">🔥 TOP PIZZA</span>
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza La Tartufo">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3 class="card-title">PIZZA LA TARTUFO</h3>
+                        <p class="card-text">Base artesana, mozzarella fresca, cebolla caramelizada, huevo de corral frito y crema trufada.</p>
+                    </div>
+                    <div class="card-meta"><span>Salsa Trufada</span> <span>🍕 Masa Madre</span></div>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-img-wrap">
+                    <span class="card-badge">👑 STREET BRIOCHE</span>
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="El Porky Brioche">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3 class="card-title">EL PORKY BRIOCHE</h3>
+                        <p class="card-text">Pan brioche de mantequilla, ternera jugosa, pulled pork deshilachado, queso cheddar fundido y cebolla frita.</p>
+                    </div>
+                    <div class="card-meta"><span>Pan Brioche Mantequilla</span> <span>🍔 100% Vacuno</span></div>
+                </div>
+            </div>
+
+            <div class="card-item">
+                <div class="card-img-wrap">
+                    <span class="card-badge">🍤 ENTRANTE ESTRELLA</span>
+                    <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80" alt="El Trio Croquetero">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3 class="card-title">EL TRIO CROQUETERO</h3>
+                        <p class="card-text">Surtido de croquetas caseras melosas: Jamón Ibérico, Pollo asado y Queso Irati curado.</p>
+                    </div>
+                    <div class="card-meta"><span>Receta de la Abuela</span> <span>🧆 Para Picar</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARTA COMPLETA -->
+        <div id="carta" class="sec-header">
+            <div class="sec-subtag">// CARTA COMPLETA · EXPLORA POR CATEGORÍA</div>
+            <h2 class="sec-title">NUESTRA CARTA</h2>
+            <p class="sec-desc">Selecciona una categoría para ver los platos detallados sin agobios.</p>
+        </div>
+
+        <!-- NAV FILTROS -->
+        <div class="cat-scroll">
+            <button class="cat-pill active" onclick="setCat('milas', this)">🍗 Las Milas</button>
+            <button class="cat-pill" onclick="setCat('pizzas', this)">🍕 Pizzas</button>
+            <button class="cat-pill" onclick="setCat('burgers', this)">🍔 Burgers</button>
+            <button class="cat-pill" onclick="setCat('menudiao', this)">⚙️ Menú Mediodía</button>
+            <button class="cat-pill" onclick="setCat('sugerencias', this)">⭐ Sugerencias</button>
+            <button class="cat-pill" onclick="setCat('picoteo', this)">🍺 Picoteo & Mar</button>
+        </div>
+
+        <!-- CATEGORIA: LAS MILAS -->
+        <div id="cat-milas" class="cat-block active">
+            <div class="cat-banner">
+                <div class="cat-banner-title">🍗 ESPECIALIDAD: LAS MILANESAS XL</div>
+                <div class="cat-banner-desc">Carne de primera rebozada al momento con pan rallado crujiente y coronada con combinaciones únicas.</div>
+            </div>
+
+            <div class="items-list-grid">
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">LA CLÁSICA</span> <span class="tag-small tag-tradicional">Tradicional</span></div>
+                    <div class="menu-list-desc">Pechuga o ternera tierna crujiente al estilo tradicional argentino.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">NAPOLITANA</span> <span class="tag-small tag-top">Clásico Top</span></div>
+                    <div class="menu-list-desc">Jamón york dulce, salsa de tomate de la casa y abundante mozzarella gratina.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">RANCHERA CANALLA</span> <span class="tag-small tag-picante">Picantita</span></div>
+                    <div class="menu-list-desc">Mozzarella, cheddar fundido, bacon crujiente, huevo frito, jalapeños y salsa BBQ.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">MALLORQUINA</span> <span class="tag-small tag-top">Dulce & Salado</span></div>
+                    <div class="menu-list-desc">Mozzarella gratinada, sobrasada artesana de la isla y un toque sutil de miel.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">BURRANESA</span> <span class="tag-small tag-gourmet">Gourmet</span></div>
+                    <div class="menu-list-desc">Mozzarella, tomates cherry concassé, burrata cremosa entera y aceite de albahaca.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">SERRANA CON HUEVO</span> <span class="tag-small tag-tradicional">Potente</span></div>
+                    <div class="menu-list-desc">Mozzarella, finas lonchas de jamón serrano y 2 huevos fritos de corral encima.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">MIKA 5 QUESOS</span> <span class="tag-small tag-top">Quesera</span></div>
+                    <div class="menu-list-desc">Mozzarella, cheddar, tomate, emmental, queso roquefort intenso y pepperoni.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">TOSCANA ITALIANA</span> <span class="tag-small tag-gourmet">Premium</span></div>
+                    <div class="menu-list-desc">Mozzarella, burrata fresca, mortadella de Bolonia, pistachos picados y albahaca.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">TRUFADA SUPREMA</span> <span class="tag-small tag-estrella">Estrella</span></div>
+                    <div class="menu-list-desc">Mozzarella, cebolla pochada caramelizada, huevo frito y crema de trufa negra.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIA: PIZZAS -->
+        <div id="cat-pizzas" class="cat-block">
+            <div class="cat-banner">
+                <div class="cat-banner-title">🍕 PIZZAS ARTESANAS DE MASA MADRE</div>
+                <div class="cat-banner-desc">Masa de fermentación lenta, crujiente por fuera y esponjosa por dentro con ingredientes 100% frescos.</div>
+            </div>
+
+            <div class="items-list-grid">
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">MARGARITA CLÁSICA</span> <span class="tag-small tag-tradicional">Básica</span></div>
+                    <div class="menu-list-desc">Salsa de tomate casera de San Marzano y mozzarella de búfala fundida.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">PEPPERONI SPICY</span> <span class="tag-small tag-picante">Spicy</span></div>
+                    <div class="menu-list-desc">Tomate, mozzarella suave y generosa capa de rodajas de pepperoni picante.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">4 QUESOS INTENSA</span> <span class="tag-small tag-top">Quesera</span></div>
+                    <div class="menu-list-desc">Mezcla artesana de mozzarella, queso roquefort azul, emmental y cheddar.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">LA BBQ TERNERA</span> <span class="tag-small tag-top">Sabor BBQ</span></div>
+                    <div class="menu-list-desc">Tomate, mozzarella, picado de ternera marinada y salsa barbacoa ahumada.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">BURRATINA DEL DIEGO</span> <span class="tag-small tag-gourmet">Fresca</span></div>
+                    <div class="menu-list-desc">Tomate, mozzarella, tomates secos confitados e hilada de burrata fresca.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">LA TARTUFO SPECIAL</span> <span class="tag-small tag-estrella">Trufada</span></div>
+                    <div class="menu-list-desc">Mozzarella, cebolla caramelizada suave, huevo frito de granja y crema trufada.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">LA CATALANA DE BARRIO</span> <span class="tag-small tag-tradicional">Local</span></div>
+                    <div class="menu-list-desc">Tomate, mozzarella, butifarra blanca y negra tradicional y champiñones laminados.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">HAZLA A TU ROLLO</span> <span class="tag-small tag-top">Custom</span></div>
+                    <div class="menu-list-desc">Base con tomate y mozzarella + elige 5 ingredientes favoritos a tu gusto.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIA: BURGERS -->
+        <div id="cat-burgers" class="cat-block">
+            <div class="cat-banner">
+                <div class="cat-banner-title">🍔 BURGERS BESTIAS DE TERNERA</div>
+                <div class="cat-banner-desc">Carne 100% vacuna picada diariamente en pan brioche artesano tostado con mantequilla.</div>
+            </div>
+
+            <div class="items-list-grid">
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">LA GUARRA</span> <span class="tag-small tag-top">Top Ventas</span></div>
+                    <div class="menu-list-desc">Doble carne de ternera, bacon ahumado crujiente, huevo frito, cheddar, cebolla caramelizada y BBQ.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">PULLED PORK BURGER</span> <span class="tag-small tag-estrella">Especial</span></div>
+                    <div class="menu-list-desc">Ternera, pulled pork estilo Tennessee, rúcula fresca, tomate, aro de cebolla y queso cheddar.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">LA MOROCHA (PAN CARBÓN)</span> <span class="tag-small tag-gourmet">Pan Negro</span></div>
+                    <div class="menu-list-desc">Pan artesano de carbón vegetal, carne de ternera, queso emmental, cebolla frita y salsa ranchera.</div>
+                </div>
+
+                <div class="menu-list-card">
+                    <div class="menu-list-header"><span class="menu-list-title">LA TRUFADA & PARMESANO</span> <span class="tag-small tag-gourmet">Trufada</span></div>
+                    <div class="menu-list-desc">Ternera jugosa, mayonesa trufada casera, cebolla frita crujiente y lascas de parmesano.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATEGORIA: MENÚ DE MEDIODÍA -->
+        <div id="cat-menudiao" class="cat-block">
+            <div class="menu-diao-header-box">
+                <span class="menu-time-badge">🕐 MIÉRCOLES A VIERNES DE 13:00H A 16:00H</span>
+                <h2 class="menu-diao-title">MENÚ DE MEDIODÍA COMPLETO</h2>
+                <p class="menu-diao-sub">Cocinado como en casa cada mediodía para los vecinos y trabajadores de Sant Andreu.</p>
+                <div class="fresh-product-box">
+                    <div class="fresh-title">¡PRODUCTO FRESCO!</div>
+                    <div class="fresh-desc">Cambiamos propuestas semanalmente</div>
+                </div>
+            </div>
+
+            <div class="menu-steps-grid">
+                <!-- PASO 01 -->
+                <div class="menu-step-card">
+                    <div class="step-num-badge">01</div>
+                    <div class="step-header-row">
+                        <div class="step-icon-box">🍲</div>
+                        <div>
+                            <div class="step-title">1. PRIMEROS</div>
+                            <div class="step-sub">A elegir una opción</div>
+                        </div>
+                    </div>
+                    <div class="step-divider"></div>
+                    <ul class="check-list">
+                        <li>Crema suave de calabaza asada con picatostes</li>
+                        <li>Ensalada de la casa con brotes verdes y vinagreta</li>
+                        <li>Revuelto jugoso de habitas baby y bacon</li>
+                        <li>Macarrones al estilo boloñesa artesana</li>
+                    </ul>
+                </div>
+
+                <!-- PASO 02 -->
+                <div class="menu-step-card">
+                    <div class="step-num-badge">02</div>
+                    <div class="step-header-row">
+                        <div class="step-icon-box">🍗</div>
+                        <div>
+                            <div class="step-title">2. SEGUNDOS</div>
+                            <div class="step-sub">A elegir una opción</div>
+                        </div>
+                    </div>
+                    <div class="step-divider"></div>
+                    <ul class="check-list">
+                        <li>Burger al plato con patatas fritas crujientes</li>
+                        <li>Pechuga a la plancha con verduritas salteadas</li>
+                        <li>Sepia a la plancha con patata panadera</li>
+                        <li>Canelón XXL gratinado de foie y trufa</li>
+                    </ul>
+                </div>
+
+                <!-- PASO 03 -->
+                <div class="menu-step-card">
+                    <div class="step-num-badge">03</div>
+                    <div class="step-header-row">
+                        <div class="step-icon-box">🍷</div>
+                        <div>
+                            <div class="step-title">3. POSTRES</div>
+                            <div class="step-sub">Bebida, Pan & Postre incluidos</div>
+                        </div>
+                    </div>
+                    <div class="step-divider"></div>
+                    
+                    <div>
+                        <div class="dessert-section-title">🍰 Postres Caseros a elegir:</div>
+                        <p class="dessert-text">Tarta Crema Catalana / Trufas heladas / Tarta de Santiago artesana / Café</p>
+                    </div>
+
+                    <div class="menu-included-box">
+                        ✓ Incluye Pan artesano + Copa de vino, cerveza tirada o agua mineral.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="cat-sugerencias" class="cat-block">
+            <div class="menu-list-card"><div class="menu-list-header"><span class="menu-list-title">SUGERENCIAS DE LA SEMANA</span></div><div class="menu-list-desc">Consulta con nuestro personal las creaciones fuera de carta de esta semana.</div></div>
+        </div>
+        
+        <div id="cat-picoteo" class="cat-block">
+            <div class="items-list-grid">
+                <div class="menu-list-card"><div class="menu-list-header"><span class="menu-list-title">PATATAS BRAVAS / NACHOS LOCOS</span></div><div class="menu-list-desc">Salsas caseras tradicionales del Diego.</div></div>
+                <div class="menu-list-card"><div class="menu-list-header"><span class="menu-list-title">SEPIA & BACALAO A LA PLANCHA</span></div><div class="menu-list-desc">Acompañados de patatas o ensalada fresca.</div></div>
+            </div>
+        </div>
+
+        <!-- MODULO RESERVA -->
+        <div id="reservas" class="booking-box">
+            <iframe 
+                data-tally-src="https://tally.so/embed/1A12vQ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
+                loading="lazy" 
+                width="100%" 
+                height="380" 
+                frameborder="0" 
+                title="Reserva tu mesa"
+                class="tally-frame">
+            </iframe>
+        </div>
+
+    </div>
+
+    <script>
+        Tally.loadEmbeds();
+
+        function setCat(catId, btn) {
+            document.querySelectorAll('.cat-block').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+            document.getElementById('cat-' + catId).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>
